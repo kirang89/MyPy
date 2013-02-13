@@ -9,7 +9,7 @@
 
 ##Best Practices
 
-##Functions
+###Functions
 
 Using stateless functions is a mandatory requirement for writing good, clean code in Python.
 
@@ -17,9 +17,10 @@ Using stateless functions is a mandatory requirement for writing good, clean cod
 
 * Module names should be kept small and all in lowercase, avoiding even 	  '_' when possible.
 
-* <pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> or even <pre><code>from module import func</code></pre>
 
-##Packages
+*	<pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> or even <pre><code>from module import func</code></pre>
+
+###Packages
 
 Leaving an __init__.py file empty inside a package is considered normal and even a good practice, if the package’s modules and sub-packages do not need to share any code.
 
