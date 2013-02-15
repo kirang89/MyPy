@@ -16,6 +16,12 @@
 
 ##Best Practices
 
+##Data Structures(list,set,tuple,dict)
+
+* ```list.__contains__``` is O(n), and so adding the elements of another list to it is O(n2). On the other hand, ```set.__contains__``` is O(log n), so the best way to do this is to use a set to check for membership, and a list to preserve order. That way you're doing n operations that are O(log n), for a total of O(n log n), which much faster than O(n2) for reasonable values of n
+
+* If you want a dictionary to remember the order in which you inserted data and not sort it lexicographically, use [OrderedDict](http://docs.python.org/2/library/collections.html#collections.OrderedDict) instead.
+
 ###Variables
 
 * Avoid global variables wherever possible. This can not only help in writing clean, performant code but can also make it very simple to write tests and debug
