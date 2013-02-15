@@ -23,6 +23,24 @@ Using stateless functions is a mandatory requirement for writing good, clean cod
 
 *	<pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> or even <pre><code>from module import func</code></pre>
 
+* Structure a module in the following manner:
+<pre><code>
+"""module docstring"""
+# imports
+# constants
+# exception classes
+# interface functions
+# classes
+# internal functions & classes
+
+    def main(...):
+  	  ...
+
+	if __name__ == '__main__':
+
+    	   status = main()
+    	   sys.exit(status)
+</code></pre>
 
 ###Packages
 
