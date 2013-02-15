@@ -23,32 +23,6 @@ Using stateless functions is a mandatory requirement for writing good, clean cod
 
 *	<pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> or even <pre><code>from module import func</code></pre>
 
-* Structure a module in the following manner:
-<pre><code>
-"""module docstring"""
-
-	\# imports
-
-	\# constants
-
-	\# exception classes
-
-	\# interface functions
-
-	\# classes
-
-	\# internal functions & classes
-
-	def main(...):
-
-  	  ...
-
-	if \__name\__ == '\__main__':
-
-    	   status = main()
-
-    	   sys.exit(status)
-</code></pre>
 
 ###Packages
 
@@ -64,7 +38,7 @@ Leaving an `__init__.py` file empty inside a package is considered normal and ev
 Use `str(x)` instead of `isinstance(x, str)`
 
 * To guard certain snippets in your code, put them under 
-<pre><code>if __name == '__main__'</code></pre> block
+<pre><code>if \__name\__ == '\__main__'</code></pre> block
 
 ##Bad Practices
 
