@@ -23,7 +23,7 @@
 ###Strings
 
 * Doing String concatenation either like 
-<pre><code>''.join([`num` for num in xrange(loop_count)])</code></pre>
+<pre><code>''.join([num for num in xrange(loop_count)])</code></pre>
 or like
 <pre><code>  str_list = []
   for num in xrange(loop_count):
@@ -40,7 +40,7 @@ is a much more efficient and pythonic way of concatenation when compared to
 * Instead of 
 <pre><code>out = "Hello" + name + ", you seem to be " + age + "years old"</code></pre>
 do this 
-<pre><code>out = "Hello %s, you seem to be %i years old" % (name, age)</code></pre>
+<pre><code>out = "Hello {0}, you seem to be {1} years old".format(name, age)</code></pre>
 
 * Instead of looping over a list of words and converting them to upper case
 <pre><code>newlist = []
@@ -59,7 +59,7 @@ Using stateless functions is a mandatory requirement for writing good, clean cod
 * Module names should be kept small and all in lowercase, avoiding even 	  `_` when possible.
 
 
-*	<pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> or even <pre><code>from module import func</code></pre>
+*	<pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> however this is the best method: <pre><code>from module import func</code></pre>
 
 * Structure a module in the following manner:
 <pre><code>
@@ -97,15 +97,12 @@ Using stateless functions is a mandatory requirement for writing good, clean cod
 * Use coercion if an object must be of a particular type i.e:
 Use `str(x)` instead of `isinstance(x, str)`
 
-* To guard certain snippets in your code, put them under 
-<pre><code>if \__name\__ == '\__main__'</code></pre> block
+* To guard certain snippets in your code, put them under a
+<pre><code>if \__name\__ == '\__main__':</code></pre> condition
 
-* Use ```range()``` and ```xrange()``` wisely.  When you call ```range```, it creates a list of objects in memory. ```xrange``` creates a generator object which gives you the values upon iteration. Thus ```xrange``` is lightweight in memory and is thus preferred when the upper bound is large.
+* Use ```range()``` and ```xrange()``` wisely.  When you call ```range```, it creates a list of objects in memory. ```xrange``` creates a generator object which gives you the values upon iteration. Thus ```xrange``` is lightweight in memory and is thus preferred when the upper bound is large. ```xrange``` is ```range`` in Python 3.
 
 
 ##Bad Practices
 
-* Large loops with something expensive
-* Nested Loops
-* Lot of function calls inside loops
-* Dictionary Lookup inside Loops
+* Obfuscation
