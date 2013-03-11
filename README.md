@@ -13,6 +13,8 @@
 
 * The Python interpreter performs some periodic checks. In particular, it decides whether or not to let another thread run and whether or not to run a pending call (typically a call established by a signal handler)
 
+* Python Dictionaries are internally hash tables that are not ordered. When you insert elements into a dict each of their keys are hashed and then stored.
+
 
 ##Best Practices
 
@@ -21,6 +23,8 @@
 * ```list.__contains__``` is O(n), and so adding the elements of another list to it is O(n2). On the other hand, ```set.__contains__``` is O(log n), so the best way to do this is to use a set to check for membership, and a list to preserve order. That way you're doing n operations that are O(log n), for a total of O(n log n), which much faster than O(n2) for reasonable values of n
 
 * If you want a dictionary to remember the order in which you inserted data and not sort it lexicographically, use [OrderedDict](http://docs.python.org/2/library/collections.html#collections.OrderedDict) instead.
+
+* To sort a list in place use the ```list.sort()``` method and to sort the list without changing it, do ```sorted(list)```
 
 ###Variables
 
