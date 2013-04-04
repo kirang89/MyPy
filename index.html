@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mypy by kirang89</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Mypy</h1>
+        <p>Summary of learnings of Python (includes essential code snippets)</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/kirang89/MyPy" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/kirang89/MyPy/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/kirang89/MyPy/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Learnings of Python(2.x)</h1>
+
+<h2>Facts about Python</h2>
+
+<ul>
+<li><p>Python has no concept of <strong>casting</strong> - everything is an object (unless it's a type). You can pass any object (or type) to anywhere, and if you try to do something with it that it doesn't support, an exception will be thrown. This is one of the most basic things about python - everything has a type, but it usually doesn't matter what that is. All you deal with are references.</p></li>
+<li><p>In many languages, an include file directive is used by the preprocessor to take all code found in the file and ‘copy’ it into the caller’s code. It is different in Python: the included code is isolated in a module namespace, which means that you generally don’t have to worry that the included code could have unwanted effects, e.g. override an existing function with the same name.</p></li>
+<li><p>Any directory with an <code>__init__.py</code> file is considered a Python package</p></li>
+<li><p>The <code>yield</code> keyword turns a function into a generator</p></li>
+<li><p>Function call overhead in Python is relatively high, especially compared with the execution speed of a builtin function</p></li>
+<li><p>The Python interpreter performs some periodic checks. In particular, it decides whether or not to let another thread run and whether or not to run a pending call (typically a call established by a signal handler)</p></li>
+<li><p>Python Dictionaries are internally hash tables that are not ordered. When you insert elements into a dict each of their keys are hashed and then stored.</p></li>
+</ul><h2>Best Practices</h2>
+
+<h3>Data Structures(list,set,tuple,dict)</h3>
+
+<ul>
+<li><p><code>list.__contains__</code> is O(n), and so adding the elements of another list to it is O(n2). On the other hand, <code>set.__contains__</code> is O(log n), so the best way to do this is to use a set to check for membership, and a list to preserve order. That way you're doing n operations that are O(log n), for a total of O(n log n), which much faster than O(n2) for reasonable values of n</p></li>
+<li><p>If you want a dictionary to remember the order in which you inserted data and not sort it lexicographically, use <a href="http://docs.python.org/2/library/collections.html#collections.OrderedDict">OrderedDict</a> instead.</p></li>
+<li><p>To sort a list in place use the <code>list.sort()</code> method and to sort the list without changing it, do <code>sorted(list)</code></p></li>
+</ul><h3>Variables</h3>
+
+<ul>
+<li>Avoid global variables wherever possible. This can not only help in writing clean, performant code but can also make it very simple to write tests and debug</li>
+</ul><h3>Strings</h3>
+
+<ul>
+<li>
+<p>Doing String concatenation either like </p>
+
+<pre><code>''.join([num for num in xrange(loop_count)])</code></pre>
+
+<p>or like</p>
+
+<pre><code>  str_list = []
+for num in xrange(loop_count):
+str_list.append(`num`)
+return ''.join(str_list)
+</code></pre>
+
+<p>is a much more efficient and pythonic way of concatenation when compared to</p>
+
+<pre><code>  out_str = ''
+for num in xrange(loop_count):
+out_str += `num`
+return out_str
+</code></pre>
+</li>
+<li>
+<p>Instead of </p>
+
+<pre><code>out = "Hello" + name + ", you seem to be " + age + "years old"</code></pre>
+
+<p>do this </p>
+
+<pre><code>out = "Hello {0}, you seem to be {1} years old".format(name, age)</code></pre>
+</li>
+<li>
+<p>Instead of looping over a list of words and converting them to upper case</p>
+
+<pre><code>newlist = []
+for word in oldlist:
+newlist.append(word.upper())
+</code></pre>
+
+<p>use <code>map</code> to push the loop from the interpreter into compiled C code</p>
+
+<pre><code>newlist = map(str.upper, oldlist)</code></pre>
+</li>
+</ul><h3>Functions</h3>
+
+<p>Using stateless functions is a mandatory requirement for writing good, clean code in Python.</p>
+
+<h3>Modules</h3>
+
+<ul>
+<li><p>Module names should be kept small and all in lowercase, avoiding even       <code>_</code> when possible.</p></li>
+<li>
+<p></p>
+<pre><code>import module</code></pre> is a better practice when compared to <pre><code>from module import *</code></pre> however this is the best method: <pre><code>from module import func</code></pre>
+</li>
+<li>
+<p>Structure a module in the following manner:</p>
+
+<pre><code>
+"""module docstring"""
+# imports
+# constants
+# exception classes
+# interface functions
+# classes
+# internal functions &amp; classes
+
+def main(...):
+  ...
+
+if __name__ == '__main__':
+
+       status = main()
+       sys.exit(status)
+</code></pre>
+</li>
+</ul><h3>Packages</h3>
+
+<ul>
+<li>Leaving an <code>__init__.py</code> file empty inside a package is considered normal and even a good practice, if the package’s modules and sub-packages do not need to share any code.</li>
+</ul><h3>Exceptions</h3>
+
+<ul>
+<li>Always try and catch the expected exception instead of using the default <code>except</code> clause. This makes it easier to understand and debug when things go wrong.</li>
+</ul><h3>Miscellaneous</h3>
+
+<ul>
+<li><p>Use exceptions to make your code cleaner and easier to read, rather than filling your code with endless branching instructions</p></li>
+<li><p>Use a list comprehension when a computed list is the desired end result, and use a generator expression, when a computed list is the intermediate result</p></li>
+<li><p>Use coercion if an object must be of a particular type i.e:
+Use <code>str(x)</code> instead of <code>isinstance(x, str)</code></p></li>
+<li>
+<p>To guard certain snippets in your code, put them under a
+</p>
+<pre><code>if __name__ == '__main__':</code></pre> condition</li>
+<li><p>Use <code>range()</code> and <code>xrange()</code> wisely.  When you call <code>range</code>, it creates a list of objects in memory. <code>xrange</code> creates a generator object which gives you the values upon iteration. Thus <code>xrange</code> is lightweight in memory and is thus preferred when the upper bound is large. <code>xrange</code> is `<code>range</code> in Python 3.</p></li>
+</ul><h2>Bad Practices</h2>
+
+<ul>
+<li>Obfuscation</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/kirang89">kirang89</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
